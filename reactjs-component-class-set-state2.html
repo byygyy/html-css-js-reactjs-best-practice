@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>reactjs class</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body>
+    <!-- reactjs-->
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            //初始化状态
+            state = {isHot:true}
+
+            render(){
+                return <h2 onClick={this.change_weth}>Today is {this.state.isHot?'hot':'cold'}!</h2>
+            }
+            
+            //自定义方法，要用赋值语句的形式加箭头函数
+            change_weth=()=>{              
+              const isHot = this.state.isHot
+              this.setState({isHot:!isHot})
+            } 
+        }
+        //渲染组件到页面
+        ReactDOM.render(<MyComponent/>,document.getElementById('root'))
+    </script>
+    
+  </body>
+</html>

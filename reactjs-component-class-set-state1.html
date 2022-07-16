@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>reactjs class</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body>
+    <!-- reactjs-->
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        //创建类组件
+        class MyComponent extends React.Component{
+            //构造器调用一次，因为只实例化了一次。
+            constructor(props)
+            {
+              super(props);
+              this.state = {isHot:true}
+              this.change_weth = this.change_weth.bind(this);
+            }
+
+            //调用1+n次，每次点击触发点击后，就调用一次render，n就是状态更新的次数。
+            render(){
+                return <h2 onClick={this.change_weth}>Today is {this.state.isHot?'hot':'cold'}!</h2>
+            }
+            
+            //调用n次，每次点击都会被调用
+            change_weth(){
+              //由于change_weth时作为onClict的回掉，不是通过实例调用的，而是直接调用的。
+              //由于类里面开启了严格模式，因此this默认就是未定义
+              console.log(this.state);
+              
+              //状态不可直接更改
+              //const isHot = this.state.isHot
+              //this.stage.isHot = !isHot
+
+              //状态修改，需要调用内置API,状态通过setStage进行更细，且更新是一种合并，不是直接替换
+              const isHot = this.state.isHot
+              this.setState({isHot:!isHot})
+            } 
+        }
+        //渲染组件到页面
+        ReactDOM.render(<MyComponent/>,document.getElementById('root'))
+    </script>
+    
+  </body>
+</html>

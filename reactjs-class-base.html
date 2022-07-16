@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>reactjs class base</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body>
+    <!-- reactjs-->
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        /*
+        类中的构造器，并非必须要写的，除非要对实例进行初始化操作，如要添加指定属性时；
+        如果b类继承了a类，且b类中写了构造器，那b类构则器必须要用super调用；
+        类中所定义的方法，都是放在了类的原型对象上，供实例去使用。
+        */
+        class Person {
+            //构造器方法
+            constructor(name,age){
+                //构造器中的this，是指类的实例对象
+                this.name = name;
+                this.age = age;
+            }
+            //一般方法
+            speak(){
+                //通过Person实例调用speak时，speak中的this就是pernal的实例
+                console.log(`我叫${this.name},我的年龄是${this.age}`)
+            }
+        }
+
+        class Student extends Person{
+            constructor(name,age,grade){
+                super(name,age);
+                this.grade = grade;
+            }
+            speak(){
+                console.log(`我叫${this.name},我的年龄是${this.age},我读的是${this.grade}`)
+            }
+            study(){
+                console.log('我很努力得学习')
+            }
+        }
+        const p1 = new Person('Tom','20')
+        console.log(p1);
+        p1.speak();
+
+        const s1 = new Student('Lily','21','dasan')
+        console.log(s1)
+        s1.speak();
+        s1.study();
+    </script>
+    
+  </body>
+</html>

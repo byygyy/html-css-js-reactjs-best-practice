@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>reactjs class props</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body>
+    <!-- reactjs-->
+    <div id="root"></div>
+    <div id="root2"></div>
+    
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            render(){
+               const {name,age,sex} = this.props
+                return(
+                  <ul>
+                    <li>name is {name}</li>
+                    <li>age is {age+1}</li>
+                    <li>sex is {sex}</li>
+                  </ul>
+                )
+            }
+        }
+        //限制对象里参数的类型
+        MyComponent.prototype = {
+          name:PropTypes.string
+        }
+        const p = {name: 'Tom', age:19, sex:'女'}
+        //渲染组件到页面
+        ReactDOM.render(<MyComponent {...p}/>,document.getElementById('root'))
+    </script>
+    
+  </body>
+</html>
